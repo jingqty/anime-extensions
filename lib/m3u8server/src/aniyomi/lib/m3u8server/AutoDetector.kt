@@ -150,6 +150,7 @@ object AutoDetector {
             data[offset + 2] == GIF_HEADER[2]
 
         if (!isJpeg && !isPng && !isGif) return -1
+        if (offset >= MPEG_TS_PACKET_SIZE && data[offset - MPEG_TS_PACKET_SIZE] != MPEG_TS_SYNC) return -1
 
         val searchEnd = minOf(data.size, offset + JUNK_END_SEARCH_LIMIT)
 
